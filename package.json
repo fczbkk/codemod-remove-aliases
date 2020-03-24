@@ -7,11 +7,12 @@
   },
   "scripts": {
     "transform": "jscodeshift ./sample/ --transform transform.js --extensions vue,js",
-    "transform-dev": "npm run transform -- --dry",
-    "dev": "chokidar \"./transform.js\" --command \"npm run transform-dev\""
+    "dev": "npm run test -- --watch",
+    "test": "jest --config=jest.config.json"
   },
   "devDependencies": {
     "chokidar-cli": "^2.1.0",
+    "jest": "^25.1.0",
     "jscodeshift-helper": "^1.1.0"
   }
 }

@@ -20,11 +20,10 @@ module.exports = adapt(function transformer (file, api) {
   const convertAliasToRelativePath = (componentPath) => {
     Object.entries(aliases).forEach(([key, val]) => {
       const fullComponentPath = path.relative(fileDirectory, val)
-      const newPath = componentPath.node.value.replace(
+      componentPath.node.value = componentPath.node.value.replace(
         new RegExp(`^${key}/`),
         `${fullComponentPath}/`
       )
-      componentPath.node.value = newPath
     })
   }
 
@@ -32,11 +31,7 @@ module.exports = adapt(function transformer (file, api) {
     .find(j.ImportDeclaration)
     .find(j.Literal)
 
-  const result = importPaths
+  return importPaths
     .forEach(convertAliasToRelativePath)
-    .toSource()
-
-  console.log(result)
-
-  return result
+    .toSource({ quote: 'single' })
 })
