@@ -1,0 +1,17 @@
+{
+  "name": "codemod-remove-aliases",
+  "version": "1.0.0",
+  "dependencies": {
+    "jscodeshift": "^0.7.0",
+    "vue-jscodeshift-adapter": "^2.0.3"
+  },
+  "scripts": {
+    "transform": "jscodeshift ./sample/ --transform transform.js --extensions vue,js",
+    "transform-dev": "npm run transform -- --dry",
+    "dev": "chokidar \"./transform.js\" --command \"npm run transform-dev\""
+  },
+  "devDependencies": {
+    "chokidar-cli": "^2.1.0",
+    "jscodeshift-helper": "^1.1.0"
+  }
+}
