@@ -6,8 +6,12 @@
 const path = require('path')
 const adapt = require('vue-jscodeshift-adapter')
 
-const rootDir = path.resolve(__dirname)
+const rootDir = (
+  // process.env.CODEMOD_REMOVE_ALIASES_ROOT_PATH ||
+  path.resolve(__dirname)
+)
 
+// TODO generated dynamically based on root directory
 const aliases = {
   'components': path.resolve(rootDir, 'components'),
   'filters': path.resolve(rootDir, 'components')
@@ -31,7 +35,9 @@ module.exports = adapt(function transformer (file, api) {
     .find(j.ImportDeclaration)
     .find(j.Literal)
 
-  return importPaths
+  const result = importPaths
     .forEach(convertAliasToRelativePath)
     .toSource({ quote: 'single' })
+
+  return result
 })
