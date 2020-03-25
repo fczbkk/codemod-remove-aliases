@@ -5,17 +5,7 @@
 
 const path = require('path')
 const adapt = require('vue-jscodeshift-adapter')
-
-const rootDir = (
-  // process.env.CODEMOD_REMOVE_ALIASES_ROOT_PATH ||
-  path.resolve(__dirname)
-)
-
-// TODO generated dynamically based on root directory
-const aliases = {
-  'components': path.resolve(rootDir, 'components'),
-  'filters': path.resolve(rootDir, 'filters')
-}
+const { rootDir, aliases } = require('./transform.config.js')
 
 module.exports = adapt(function transformer (file, api) {
   const j = api.jscodeshift
