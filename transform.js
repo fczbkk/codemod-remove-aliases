@@ -14,7 +14,7 @@ const rootDir = (
 // TODO generated dynamically based on root directory
 const aliases = {
   'components': path.resolve(rootDir, 'components'),
-  'filters': path.resolve(rootDir, 'components')
+  'filters': path.resolve(rootDir, 'filters')
 }
 
 module.exports = adapt(function transformer (file, api) {
